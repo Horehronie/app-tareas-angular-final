@@ -1,0 +1,47 @@
+<div class="table-container">
+  <table mat-table [dataSource]="tasks()" class="mat-elevation-z8">
+  
+    <!-- Columna: ID -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+    </ng-container>
+
+    <!-- Columna: Titular -->
+    <ng-container matColumnDef="titular">
+      <th mat-header-cell *matHeaderCellDef> Titular </th>
+      <td mat-cell *matCellDef="let element"> {{ element.titular }} </td>
+    </ng-container>
+
+    <!-- Columna: Monto -->
+    <ng-container matColumnDef="monto">
+      <th mat-header-cell *matHeaderCellDef> Monto </th>
+      <td mat-cell *matCellDef="let element"> {{ element.monto }} </td>
+    </ng-container>
+
+    <!-- Columna: Estado -->
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let element"> {{ element.estado ? 'Pagada' : 'Impaga' }} 
+      </td>
+    </ng-container>
+
+    <!-- Columna: Archivo -->
+    <ng-container matColumnDef="archivo">
+      <th mat-header-cell *matHeaderCellDef> Archivo </th>
+      <td mat-cell *matCellDef="let element"> {{ element.archivo }} </td>
+    </ng-container>
+
+    <!-- Fila de encabezado -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <!-- Fila de datos: Angular Material itera sobre cada elemento en tasks() -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="no-data-row" *matNoDataRow>
+      <td [attr.colspan]="displayedColumns.length" class="no-data-message">
+        No hay tareas cargadas
+      </td>
+    </tr>
+
+  </table>
+</div>
