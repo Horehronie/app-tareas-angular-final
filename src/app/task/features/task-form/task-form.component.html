@@ -1,40 +1,43 @@
 <div class="signup-container">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Cargando factura</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form [formGroup]="form" (ngSubmit)="submit()">
-          <!-- Campo Titular -->
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Titular</mat-label>
-            <input matInput type="text" formControlName="titular" />
-          </mat-form-field>
-  
-          <!-- Campo Monto -->
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Monto</mat-label>
-            <input matInput type="number" formControlName="monto" />
-          </mat-form-field>
-  
-          <!-- Campo Archivo -->
-          <div class="full-width">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Cargando factura</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <!-- Campo Titular -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Titular</mat-label>
+          <input matInput type="text" formControlName="titular" />
+        </mat-form-field>
+
+        <!-- Campo Monto -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Monto</mat-label>
+          <input matInput type="number" formControlName="monto" />
+        </mat-form-field>
+
+        <!-- Campo Archivo -->
+        <!-- Se muestra el input de archivo solo en modo new (cuando idTask es vacío) -->
+        <div class="form-group">
+          <div class="full-width" *ngIf="!idTask">
             <label for="archivo">Archivo</label>
-            <input id="archivo" formControlName="archivo" type="file" (change)="onFileSelected($event)" accept="application/pdf, image/*" />
+            <input id="archivo" type="file" (change)="onFileSelected($event)" accept="application/pdf, image/*" />
           </div>
-          
-          <!-- Campo pagada -->
-          <div class="toggle-container full-width">
-            ¿Está paga?
-            <mat-slide-toggle formControlName="estado">
-            </mat-slide-toggle>
-          </div>
-  
-          <button [disabled]="loading()" mat-raised-button color="primary" type="submit" class="full-width" >
-            {{loading()? 'Cargando...' : 'Cargar tarea'}}
-          </button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  
+          <!-- Campo oculto para almacenar el URL del archivo -->
+          <input type="hidden" formControlName="archivo" />
+        </div>
+
+        <!-- Campo pagada -->
+        <div class="toggle-container full-width">
+          ¿Está paga?
+          <mat-slide-toggle formControlName="estado"></mat-slide-toggle>
+        </div>
+
+        <button [disabled]="loading() || !form.value.archivo" mat-raised-button color="primary" type="submit" class="full-width">
+          {{ loading() ? 'Cargando...' : 'Cargar tarea' }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

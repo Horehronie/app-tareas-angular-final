@@ -1,40 +1,75 @@
 <div class="table-container">
   <table mat-table [dataSource]="tasks()" class="mat-elevation-z8">
-  
+
     <!-- Columna: ID -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+      <td mat-cell *matCellDef="let task"> {{ task.id }} </td>
     </ng-container>
 
     <!-- Columna: Titular -->
     <ng-container matColumnDef="titular">
       <th mat-header-cell *matHeaderCellDef> Titular </th>
-      <td mat-cell *matCellDef="let element"> {{ element.titular }} </td>
+      <td mat-cell *matCellDef="let task"> {{ task.titular }} </td>
     </ng-container>
 
     <!-- Columna: Monto -->
     <ng-container matColumnDef="monto">
       <th mat-header-cell *matHeaderCellDef> Monto </th>
-      <td mat-cell *matCellDef="let element"> {{ element.monto }} </td>
+      <td mat-cell *matCellDef="let task"> {{ task.monto }} </td>
     </ng-container>
 
     <!-- Columna: Estado -->
     <ng-container matColumnDef="estado">
       <th mat-header-cell *matHeaderCellDef> Estado </th>
-      <td mat-cell *matCellDef="let element"> {{ element.estado ? 'Pagada' : 'Impaga' }} 
+      <td mat-cell *matCellDef="let task">
+        {{ task.estado ? 'Pagada' : 'Impaga' }}
       </td>
     </ng-container>
 
     <!-- Columna: Archivo -->
     <ng-container matColumnDef="archivo">
       <th mat-header-cell *matHeaderCellDef> Archivo </th>
-      <td mat-cell *matCellDef="let element"> {{ element.archivo }} </td>
+      <td mat-cell *matCellDef="let task">
+        <a mat-raised-button color="primary" href="{{ task.archivo }}" target="_blank">
+          Ver Archivo
+        </a>
+      </td>
+    </ng-container>
+    
+  
+
+    <!-- Columna edit -->
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let task">
+        <a [routerLink]="['/tasks/edit/'+ task.id]" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+               viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+               class="icon icon-tabler icon-tabler-edit">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"/>
+            <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"/>
+            <path d="M16 5l3 3"/>
+          </svg>
+        </a>
+      </td>
+    </ng-container>
+
+    <!-- Columna delete -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let task">
+        <a [routerLink]="['/tasks/delete/' + task.id]">
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+        </a>
+      </td>
     </ng-container>
 
     <!-- Fila de encabezado -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <!-- Fila de datos: Angular Material itera sobre cada elemento en tasks() -->
+    <!-- Fila de datos -->
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
     <tr class="no-data-row" *matNoDataRow>
