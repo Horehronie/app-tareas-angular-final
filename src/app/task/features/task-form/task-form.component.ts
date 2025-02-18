@@ -24,7 +24,8 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './task-form.component.html',
-  styleUrls: ['./task-form.component.scss']
+  styleUrls: ['./task-form.component.scss'],
+  providers: [TaskService],
 })
 export default class TaskFormComponent {
   private _formBuilder = inject(FormBuilder);

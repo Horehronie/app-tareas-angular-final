@@ -19,7 +19,8 @@ import { TaskService } from '../../data-access/task.service';
     FormsModule
   ],
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.scss']
+  styleUrls: ['./task-list.component.scss'],
+  providers: [TaskService],
 })
 
 export default class TaskListComponent {
