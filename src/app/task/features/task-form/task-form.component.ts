@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Task, TaskCreate, TaskService } from '../../data-access/task.service';
 import { toast } from 'ngx-sonner';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { UploadService } from '../../data-access/upload-file/upload.service';
 import { CommonModule } from '@angular/common';
 
@@ -21,7 +21,8 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatButtonModule,
     MatSlideToggleModule,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],

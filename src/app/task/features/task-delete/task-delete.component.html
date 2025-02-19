@@ -10,9 +10,12 @@
             Eliminar
         </a>
             
-          <a mat-raised-button color="primary" class="full-width" [routerLink]="['/tasks/']" [disabled]="loading()">
-            Volver
-          </a>
+        <a mat-raised-button 
+        class="back-button"
+        [routerLink]="['/tasks/']" 
+        [disabled]="loading()">
+  Volver
+      </a>
         </form>
             
         </mat-card-content>

@@ -8,7 +8,7 @@
 
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="submit()" class="form-content">
-        <!-- Titular Field -->
+        <!-- Titular  -->
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>Titular</mat-label>
           <input matInput placeholder="Ingrese el titular" formControlName="titular" />
@@ -17,7 +17,7 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- Monto Field -->
+        <!-- Monto  -->
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>Monto</mat-label>
           <input matInput type="number" placeholder="0.00" formControlName="monto" />
@@ -27,7 +27,7 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- File Upload Section -->
+        <!-- File Upload -->
         <div class="file-upload-section" *ngIf="!idTask">
           <label class="file-upload-label">
             <input type="file" 
@@ -42,7 +42,7 @@
         </div>
         <input type="hidden" formControlName="archivo" />
 
-        <!-- Estado Toggle -->
+        <!-- Estado  -->
         <div class="toggle-section">
           <span class="toggle-label">Estado de pago</span>
           <mat-slide-toggle formControlName="estado" color="primary">
@@ -50,7 +50,8 @@
           </mat-slide-toggle>
         </div>
 
-        <!-- Submit Button -->
+        <!-- Submit  -->
+      <div class="buttons-container">
         <button mat-raised-button 
                 color="primary" 
                 type="submit" 
@@ -58,6 +59,17 @@
                 [disabled]="loading() || !form.value.archivo">
           <span>{{ loading() ? 'Procesando...' : (idTask ? 'Actualizar' : 'Guardar') }}</span>
         </button>
+        
+        <!-- Volver  -->
+        <button mat-raised-button 
+                class="back-button"
+                type="button"
+                [routerLink]="['/tasks/']" 
+                [disabled]="loading()">
+          Volver
+        </button>
+      </div>
+
       </form>
     </mat-card-content>
   </mat-card>

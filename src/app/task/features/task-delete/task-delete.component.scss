@@ -101,3 +101,30 @@ form {
     border: 1px solid currentColor;
   }
 }
+
+.back-button {
+  width: 100%;
+  padding: clamp(0.5rem, 2vw, 0.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: clamp(14px, 4vw, 16px);
+
+  &:disabled {
+    opacity: 0.7;
+  }
+}
+
+.back-button {
+  background-color: #37474F;
+  color: #fff;
+  
+  &:hover:not(:disabled) {
+    background-color: #455A64;
+  }
+  
+  &:active:not(:disabled) {
+    background-color: #263238;
+  }
+}
