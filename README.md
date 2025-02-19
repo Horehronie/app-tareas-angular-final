@@ -13,8 +13,8 @@
 - Firebase (Authentication, Storage, Firestore Database)
 - Ngx-sonner para Notificaciones y Toasts
 - Git, GitHub y GitHub Pages
-## Pruebas
-La app está subida a [GitHub Pages](https://horehronie.github.io/app-tareas-angular-final/)) para pruebas. Se puede ingresar con credenciales de prueba, las cuales están cargadas con varias tareas para probar su visualización y edición:
+## Pruebas y uso de la app
+La app está subida a [GitHub Pages](https://horehronie.github.io/app-tareas-angular-final/)) para pruebas. Se puede ingresar con credenciales de prueba, las cuales están cargadas con varias facturas para probar su visualización y edición:
 - E-Mail de prueba: test@prueba.com
 - Password: 123456
 Todas las funciones están disponibles para su uso y testeo. El límite de carga de archivos es de 10 MB por archivo.
