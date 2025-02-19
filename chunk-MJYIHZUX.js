@@ -1,0 +1,1 @@
+import{F as r,J as e,jc as a,mc as o,oc as n,rc as i}from"./chunk-5B4YHSEC.js";var u=class t{_auth=e(a);get authState$(){return o(this._auth)}get currentUser(){return n().currentUser}logOut(){return i(this._auth)}static \u0275fac=function(c){return new(c||t)};static \u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})};export{u as a};
