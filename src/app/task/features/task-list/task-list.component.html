@@ -1,7 +1,4 @@
-<div class="example-button-row">
-    <a  mat-button routerLink="/tasks/new">Nueva tarea</a>
-  </div>
-  @if(tasksService.loading()){
+@if(tasksService.loading()){
     <p>Cargando...</p>
   }@else {
     <app-table [tasks]="tasksService.getTasks()"/>

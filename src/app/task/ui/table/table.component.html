@@ -1,100 +1,99 @@
-<!-- Campo para filtrar -->
-<div class="filter-container" style="margin-bottom: 16px;">
-  <mat-form-field appearance="fill">
-    <mat-label>Filtrar</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Escribe para filtrar">
-  </mat-form-field>
-</div>
+<mat-card class="invoice-card">
+  <mat-card-header>
+    <mat-card-title>Facturas cargadas</mat-card-title>
+  </mat-card-header>
 
-<!-- Tabla -->
-<div class="table-container">
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-    
-    <!-- Columna: ID -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let task"> {{ task.id }} </td>
-    </ng-container>
-
-    <!-- Columna: Titular -->
-    <ng-container matColumnDef="titular">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Titular </th>
-      <td mat-cell *matCellDef="let task"> {{ task.titular }} </td>
-    </ng-container>
-
-    <!-- Columna: Monto -->
-    <ng-container matColumnDef="monto">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Monto </th>
-      <td mat-cell *matCellDef="let task"> {{ task.monto }} </td>
-    </ng-container>
-
-    <!-- Columna: Estado -->
-    <ng-container matColumnDef="estado">
-      <th mat-header-cell *matHeaderCellDef> Estado </th>
-      <td mat-cell *matCellDef="let task"> {{ task.estado ? 'Pagada' : 'Impaga' }} </td>
-    </ng-container>
-
-    <!-- Columna: Archivo -->
-    <ng-container matColumnDef="archivo">
-      <th mat-header-cell *matHeaderCellDef> Archivo </th>
-      <td mat-cell *matCellDef="let task">
-        <a mat-raised-button color="primary" [href]="task.archivo" target="_blank">
-          Ver Archivo
+  <mat-card-content>
+    <div class="action-filter-row">
+      <div class="action">
+        <a mat-raised-button color="primary" [routerLink]="['/tasks/new/']">
+          <mat-icon>add</mat-icon>
+          Ingresar factura
         </a>
-      </td>
-    </ng-container>
+      </div>
 
-    <!-- Columna: Editar -->
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let task">
-        <a [routerLink]="['/tasks/edit/' + task.id]">
-          <!-- Icono de editar -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-               viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-               class="icon icon-tabler icon-tabler-edit">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"/>
-            <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"/>
-            <path d="M16 5l3 3"/>
-          </svg>
-        </a>
-      </td>
-    </ng-container>
+      <div class="filter">
+        <mat-form-field class="filter-field" appearance="outline">
+          <mat-label>Filtrar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Buscar factura..." #input>
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
 
-    <!-- Columna: Borrar -->
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let task">
-        <a [routerLink]="['/tasks/delete/' + task.id]">
-          <!-- Icono de borrar -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-               viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-               class="icon icon-tabler icon-tabler-trash">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M4 7l16 0" />
-            <path d="M10 11l0 6" />
-            <path d="M14 11l0 6" />
-            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-          </svg>
-        </a>
-      </td>
-    </ng-container>
+    <div class="table-container mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let task"> {{task.id}} </td>
+        </ng-container>
 
-    <!-- Fila de encabezado -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <!-- Fila de datos -->
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <!-- Titular Column -->
+        <ng-container matColumnDef="titular">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Titular </th>
+          <td mat-cell *matCellDef="let task"> {{task.titular}} </td>
+        </ng-container>
 
-    <!-- Fila para cuando no haya datos -->
-    <tr class="no-data-row" *matNoDataRow>
-      <td [attr.colspan]="displayedColumns.length" class="no-data-message">
-        No hay tareas cargadas
-      </td>
-    </tr>
+        <!-- Monto Column -->
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Monto </th>
+          <td mat-cell *matCellDef="let task"> {{task.monto}} </td>
+        </ng-container>
 
-  </table>
-</div>
+        <!-- Estado Column -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+          <td mat-cell *matCellDef="let task">
+            <div class="status-chip" [class.paid]="task.estado" [class.unpaid]="!task.estado">
+              {{task.estado ? 'Pagada' : 'Impaga'}}
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Archivo Column -->
+        <ng-container matColumnDef="archivo">
+          <th mat-header-cell *matHeaderCellDef> Archivo </th>
+          <td mat-cell *matCellDef="let task">
+            <a mat-stroked-button color="primary" [href]="task.archivo" target="_blank">
+              <mat-icon>visibility</mat-icon>
+              Ver Archivo
+            </a>
+          </td>
+        </ng-container>
+
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let task">
+            <a mat-icon-button color="primary" [routerLink]="['/tasks/edit/', task.id]">
+              <mat-icon>edit</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+
+        <!-- Delete Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let task">
+            <a mat-icon-button color="warn" [routerLink]="['/tasks/delete/', task.id]">
+              <mat-icon>delete</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell no-data-message" [attr.colspan]="displayedColumns.length">
+            <mat-icon>info</mat-icon>
+            No hay tareas cargadas
+          </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

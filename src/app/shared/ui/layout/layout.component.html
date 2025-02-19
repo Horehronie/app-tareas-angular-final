@@ -1,0 +1,13 @@
+<div class="layout-container">
+    <mat-toolbar class="header-toolbar">
+      <div class="toolbar-content">
+        <button mat-button class="logout-button" (click)="logOut()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>

@@ -8,7 +8,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Task, TaskCreate, TaskService } from '../../data-access/task.service';
 import { toast } from 'ngx-sonner';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UploadService } from '../../upload-file/upload.service';
+import { UploadService } from '../../data-access/upload-file/upload.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

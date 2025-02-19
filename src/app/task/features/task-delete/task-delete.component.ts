@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Injectable } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,6 +13,7 @@ import { getStorage, ref, deleteObject } from 'firebase/storage';
 @Component({
   selector: 'app-task-delete',
   standalone: true,
+  providers: [TaskService],
   imports: [
     ReactiveFormsModule,
     MatCardModule,
@@ -25,6 +26,11 @@ import { getStorage, ref, deleteObject } from 'firebase/storage';
   templateUrl: './task-delete.component.html',
   styleUrls: ['./task-delete.component.scss']
 })
+
+@Injectable({
+  providedIn: 'root'
+})
+
 export default class TaskDeleteComponent {
   idTask: string = '';
 

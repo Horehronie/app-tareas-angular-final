@@ -3,7 +3,6 @@ import TableComponent from '../../ui/table/table.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../data-access/task.service';
 
@@ -15,7 +14,6 @@ import { TaskService } from '../../data-access/task.service';
     MatIconModule, 
     MatDividerModule, 
     MatButtonModule, 
-    RouterLink,
     FormsModule
   ],
   templateUrl: './task-list.component.html',

@@ -1,0 +1,25 @@
+.header-toolbar {
+    background: transparent; 
+    height: 28px; 
+    padding: 0 16px;
+    display: flex;
+    align-items: start; 
+    justify-content: flex-end; 
+    padding-top: 6px;;
+}
+
+.toolbar-content {
+    display: flex;
+    align-items: bottom; /* Centra verticalmente el botón */
+}
+
+.logout-button {
+    color: white;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+}
+
+.logout-button mat-icon {
+    margin-right: 4px;
+}
