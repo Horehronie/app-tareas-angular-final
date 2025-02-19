@@ -1,3 +1,4 @@
+//BOTON DE CERRAR SESION PARA EL HEADER
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthStateService } from '../../auth-state.service';

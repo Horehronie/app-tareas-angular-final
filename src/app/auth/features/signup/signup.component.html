@@ -8,7 +8,7 @@
 
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="submit()" class="form-content">
-        <!-- Email Field -->
+        <!-- Email  -->
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>Email</mat-label>
           <input matInput type="email" placeholder="usuario@ejemplo.com" formControlName="email" />
@@ -20,7 +20,7 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- Password Field -->
+        <!-- Password  -->
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>Contraseña</mat-label>
           <input matInput type="password" placeholder="********" formControlName="password" />
@@ -29,7 +29,7 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- Submit Button -->
+        <!-- Submit  -->
         <button mat-raised-button 
                 color="primary" 
                 type="submit" 
@@ -45,6 +45,8 @@
         <app-google-button (onClick)="submitWithGoogle()" class="google-button" />
       </form>
     </mat-card-content>
+
+    <!-- Iniciar Sesion -->
 
     <mat-card-actions class="card-actions">
       <p class="signup-text">

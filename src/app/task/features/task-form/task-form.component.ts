@@ -29,25 +29,31 @@ import { CommonModule } from '@angular/common';
   providers: [TaskService],
 })
 export default class TaskFormComponent {
+  // Inyección de dependencias para el manejo de formularios, tareas, navegación, etc.
   private _formBuilder = inject(FormBuilder);
   private _taskService = inject(TaskService);
   private _router = inject(Router);
   private _uploadService = inject(UploadService);
   private _route = inject(ActivatedRoute);
 
+  // Indicador de carga para deshabilitar botones mientras se procesa.
   loading = signal(false);
 
+  // Almacena el ID de la factura (si se está actualizando).
   idTask: string = '';
 
+  // Almacena el archivo seleccionado temporalmente.
   archivoFile: File | null = null;
 
+  // Definición del formulario con validadores para cada campo.
   form: FormGroup = this._formBuilder.group({
     titular: this._formBuilder.control('', Validators.required),
     monto: this._formBuilder.control('', Validators.required),
     estado: this._formBuilder.control(false, Validators.required),
-    archivo: this._formBuilder.control('', Validators.required) // Se almacenará la URL del archivo
+    archivo: this._formBuilder.control('', Validators.required) // Almacena la URL del archivo subido.
   });
 
+  // Maneja la selección de archivos y su posterior subida.
   onFileSelected(event: Event): void {
     const inputElem = event.target as HTMLInputElement;
     
@@ -55,10 +61,10 @@ export default class TaskFormComponent {
       this.archivoFile = inputElem.files[0];
       console.log('Archivo seleccionado:', this.archivoFile);
   
-      // Subir el archivo a Firebase Storage usando UploadService
+      // Se invoca el servicio para subir el archivo a Firebase Storage.
       this._uploadService.uploadFile(this.archivoFile).subscribe({
         next: (url) => {
-          // Actualiza el formulario con la URL obtenido
+          // Se actualiza el campo "archivo" del formulario con la URL recibida.
           this.form.patchValue({ archivo: url });
           console.log('Archivo subido. URL:', url);
         },
@@ -70,8 +76,8 @@ export default class TaskFormComponent {
     }
   }
   
+  // Se extrae el parámetro "idTask" de la URL.
   ngOnInit() {
-    // Extraemos el parámetro 'idTask' de la ruta.
     const id = this._route.snapshot.paramMap.get('idTask');
     if (id) {
       this.idTask = id;
@@ -79,6 +85,7 @@ export default class TaskFormComponent {
     }
   }
 
+  // Obtiene la factura desde el servicio y actualiza el formulario con sus datos.
   async getTask(id: string) {
     const taskSnapshot = await this._taskService.getTask(id);
     if (!taskSnapshot.exists()) return;
@@ -89,8 +96,9 @@ export default class TaskFormComponent {
     });
   }
 
+  // Envía el formulario para crear o actualizar una factura.
   async submit() {
-    // Verifica que el formulario sea válido y que el campo 'archivo' tenga valor (ya subido)
+    // Verifica que el formulario sea válido y que se haya subido un archivo.
     if (this.form.invalid || !this.form.value.archivo) {
       console.log('Formulario inválido');
       toast.error('Complete todos los campos y espere a que se suba el archivo');
@@ -101,14 +109,15 @@ export default class TaskFormComponent {
       this.loading.set(true);
       const { titular, monto, estado, archivo } = this.form.value;
   
-      // Crea la tarea utilizando la URL del archivo ya subido
+      // Se arma el objeto de tarea a partir de los datos del formulario.
       const task: TaskCreate = {
         titular: titular || '',
         monto: monto || 0,
         estado: estado || false,
-        archivo: archivo // Ya contiene la URL
+        archivo: archivo // Ya contiene la URL del archivo subido.
       };
   
+      // Si se pasó un idTask, se actualiza; de lo contrario, se crea una nueva tarea.
       if (this.idTask) {
         this._taskService.update(task, this.idTask);
       } else {

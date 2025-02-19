@@ -1,5 +1,6 @@
-@if(tasksService.loading()){
+
+@if(tasksService.loading()){ <!--Muestra Cargando... mientras se obtienen las facturas-->
     <p>Cargando...</p>
   }@else {
-    <app-table [tasks]="tasksService.getTasks()"/>
+    <app-table [tasks]="tasksService.getTasks()"/> <!--Muestra las facturas del usuario-->
   }

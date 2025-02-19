@@ -20,9 +20,7 @@ export class UploadService {
 
       uploadTask.on(
         'state_changed',
-        (snapshot) => {
-          // Puedes agregar algo aquí si necesitas saber el estado de la carga
-        },
+        (snapshot) => {},
         (error) => {
           observer.error(error);
         },
