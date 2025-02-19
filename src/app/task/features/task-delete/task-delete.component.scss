@@ -1,54 +1,103 @@
 .signup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #152426; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #152426;
+  padding: 16px;
+}
+
+mat-card {
+  width: 400px;
+  color: #f3f4f6;
+  background: #273436;
+  border-radius: 4px; 
+  padding: 24px; 
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),
+              0 1px 1px 0 rgba(0,0,0,.14),
+              0 1px 3px 0 rgba(0,0,0,.12); 
+}
+
+mat-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12); // Material divider opacity
+
+  mat-card-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.87); // Material primary text
   }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Material standard spacing
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
   
+  &[mat-raised-button] {
+    padding: 0 16px;
+    height: 36px; // Material standard button height
+    line-height: 36px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+
+    &:disabled {
+      opacity: 0.7;
+    }
+    
+    // First button (Delete)
+    &:first-of-type {
+      background-color: #f44336; // Material Design red
+      color: white;
+      margin-bottom: 16px;
+
+      &:hover {
+        background-color: #d32f2f; // Darker shade for hover
+      }
+      
+    }
+    
+    // Second button (Back)
+    &:last-of-type {
+      background-color: transparent;
+      color: #2196f3; // Material blue
+      border: 1px solid currentColor;
+
+      &:hover {
+        background-color: rgba(33, 150, 243, 0.04); // Material hover state
+      }
+    }
+    
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 480px) {
   mat-card {
-    width: 400px;
-    margin: 16px;
-    color: #f3f4f6;
-    padding: 1%;
-    background: #273436;
-  }
-  
-  .full-width {
     width: 100%;
-    margin-bottom: 16px;
+    max-width: 360px;
   }
-  
-  mat-card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 5%;
-  }
-  
-  p {
-    color: white;
-    font-size: 14px;
-  }
-  
-  app-google-button {
-    padding: 10px;
-  }
-  
-  .toggle-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-  }
+}
 
-  mat-slide-toggle{
-    margin-left: 5px;
-  }
+// Material ripple enhancement
+.mat-ripple {
+  overflow: hidden;
+  position: relative;
+}
 
-  .button-container {
-    display: flex;
-    gap: 10px; /* Espacio entre botones */
-    justify-content: center; /* Opcional: centra los botones */
+// Optional: High Contrast mode support
+@media (forced-colors: active) {
+  .full-width[mat-raised-button] {
+    border: 1px solid currentColor;
   }
-  
+}

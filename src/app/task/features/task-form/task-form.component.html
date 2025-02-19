@@ -1,41 +1,62 @@
-<div class="signup-container">
-  <mat-card>
+<div class="form-container">
+  <mat-card class="form-card">
     <mat-card-header>
-      <mat-card-title>Cargando factura</mat-card-title>
+      <mat-card-title>
+        <h1 class="form-title">{{ idTask ? 'Actualizar Factura' : 'Cargar Factura' }}</h1>
+      </mat-card-title>
     </mat-card-header>
+
     <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <!-- Campo Titular -->
-        <mat-form-field appearance="fill" class="full-width">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="form-content">
+        <!-- Titular Field -->
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Titular</mat-label>
-          <input matInput type="text" formControlName="titular" />
+          <input matInput placeholder="Ingrese el titular" formControlName="titular" />
+          <mat-error *ngIf="form.get('titular')?.errors?.['required']">
+            El titular es requerido
+          </mat-error>
         </mat-form-field>
 
-        <!-- Campo Monto -->
-        <mat-form-field appearance="fill" class="full-width">
+        <!-- Monto Field -->
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Monto</mat-label>
-          <input matInput type="number" formControlName="monto" />
+          <input matInput type="number" placeholder="0.00" formControlName="monto" />
+          <span matPrefix class="currency-prefix">$&nbsp;</span>
+          <mat-error *ngIf="form.get('monto')?.errors?.['required']">
+            El monto es requerido
+          </mat-error>
         </mat-form-field>
 
-        <!-- Campo Archivo -->
-        <!-- Se muestra el input de archivo solo en modo new (cuando idTask es vacío) -->
-        <div class="form-group">
-          <div class="full-width" *ngIf="!idTask">
-            <label for="archivo">Archivo</label>
-            <input id="archivo" type="file" (change)="onFileSelected($event)" accept="application/pdf, image/*" />
-          </div>
-          <!-- Campo oculto para almacenar el URL del archivo -->
-          <input type="hidden" formControlName="archivo" />
+        <!-- File Upload Section -->
+        <div class="file-upload-section" *ngIf="!idTask">
+          <label class="file-upload-label">
+            <input type="file" 
+                   (change)="onFileSelected($event)" 
+                   accept="application/pdf, image/*"
+                   class="file-input" />
+            <span class="upload-text">Seleccionar archivo</span>
+          </label>
+          <p class="file-name" *ngIf="archivoFile">
+            {{ archivoFile.name }}
+          </p>
+        </div>
+        <input type="hidden" formControlName="archivo" />
+
+        <!-- Estado Toggle -->
+        <div class="toggle-section">
+          <span class="toggle-label">Estado de pago</span>
+          <mat-slide-toggle formControlName="estado" color="primary">
+            {{ form.get('estado')?.value ? 'Pagada' : 'Pendiente' }}
+          </mat-slide-toggle>
         </div>
 
-        <!-- Campo pagada -->
-        <div class="toggle-container full-width">
-          ¿Está paga?
-          <mat-slide-toggle formControlName="estado"></mat-slide-toggle>
-        </div>
-
-        <button [disabled]="loading() || !form.value.archivo" mat-raised-button color="primary" type="submit" class="full-width">
-          {{ loading() ? 'Cargando...' : 'Cargar tarea' }}
+        <!-- Submit Button -->
+        <button mat-raised-button 
+                color="primary" 
+                type="submit" 
+                class="submit-button"
+                [disabled]="loading() || !form.value.archivo">
+          <span>{{ loading() ? 'Procesando...' : (idTask ? 'Actualizar' : 'Guardar') }}</span>
         </button>
       </form>
     </mat-card-content>

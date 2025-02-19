@@ -6,11 +6,11 @@
 <mat-card-content>
       <form>
       
-        <a mat-raised-button color="primary" class="full-width" (click)="submit()">
+        <a mat-raised-button color="primary" class="full-width" (click)="submit()" [disabled]="loading()">
             Eliminar
         </a>
             
-          <a mat-raised-button color="primary" class="full-width" [routerLink]="['/tasks/']">
+          <a mat-raised-button color="primary" class="full-width" [routerLink]="['/tasks/']" [disabled]="loading()">
             Volver
           </a>
         </form>

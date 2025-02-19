@@ -1,38 +1,139 @@
-.signup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #152426; 
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: linear-gradient(135deg, #152426 0%, #1a2f32 100%);
+}
+
+.form-card {
+  width: 100%;
+  max-width: min(400px, 90vw);
+  background: #273436;
+  border-radius: clamp(8px, 2vw, 12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 480px) {
+    margin: 1rem;
   }
-  
-  mat-card {
-    width: 400px;
-    margin: 16px;
-    color:#f3f4f6;
-    padding: 1%;
-    background: #273436;
-  }
-  
-  .full-width {
-    width: 100%;
-    margin-bottom: 16px;
-  }
-  
 
   mat-card-header {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 3vw, 1.5rem) 0;
+  }
+
+  .form-title {
+    color: #f3f4f6;
+    font-size: clamp(20px, 5vw, 24px);
+    font-weight: 500;
+    margin: 0;
     text-align: center;
-    margin-bottom: 5%;
+    width: 100%;
+  }
+}
+
+.form-content {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-field {
+  width: 100%;
+
+  ::ng-deep {
+    .mat-form-field-wrapper {
+      margin-bottom: 0;
+    }
+
+    .mat-form-field-outline {
+      color: rgba(255, 255, 255, 0.12);
+    }
+
+    .mat-form-field-label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .mat-input-element {
+      color: #f3f4f6;
+      font-size: clamp(14px, 4vw, 16px);
+    }
+
+    .mat-form-field-flex {
+      align-items: center;
+    }
+  }
+}
+
+.submit-button {
+  width: 100%;
+  padding: clamp(0.5rem, 2vw, 0.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: clamp(14px, 4vw, 16px);
+  margin-top: 0.5rem;
+
+  &:disabled {
+    opacity: 0.7;
+  }
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
   }
 
-  p{
-    color: white;
-    font-size: 14px;
+  .divider-text {
+    color: rgba(255, 255, 255, 0.6);
+    background: #273436;
+    padding: 0 1rem;
+    position: relative;
+    font-size: 0.875rem;
+  }
+}
+
+.google-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  ::ng-deep {
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.card-actions {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  .signup-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: clamp(14px, 4vw, 16px);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  app-google-button{
-    padding: 10px;
+  .signup-link {
+    font-weight: 500;
   }
+}

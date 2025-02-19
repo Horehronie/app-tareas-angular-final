@@ -1,4 +1,4 @@
-import { Component, inject, Injectable } from '@angular/core';
+import { Component, inject, Injectable, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,6 +37,8 @@ export default class TaskDeleteComponent {
   private _taskService = inject(TaskService);
   private _router = inject(Router);
   private _route = inject(ActivatedRoute);
+
+  loading = signal(false);
 
   // Extrae la ruta del archivo desde la URL 
   private extractFilePath(fileUrl: string): string | null {
@@ -77,6 +79,7 @@ export default class TaskDeleteComponent {
 
   async submit() {
     try {
+      this.loading.set(true);
       // Primero obtenemos la tarea para extraer la URL del archivo
       const taskSnapshot = await this._taskService.getTask(this.idTask);
       if (!taskSnapshot.exists()) {
@@ -95,6 +98,7 @@ export default class TaskDeleteComponent {
       toast.success('Factura eliminada con exito');
       this._router.navigateByUrl('/tasks');
     } catch (error) {
+      this.loading.set(false);
       console.error('Error al eliminar la factura:', error);
       toast.error('Hubo un error al eliminar la factura');
     }
